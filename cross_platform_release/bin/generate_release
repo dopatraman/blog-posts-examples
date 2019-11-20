@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker run -v $(pwd):/opt/build --rm -it my-release:latest /opt/build/bin/build
