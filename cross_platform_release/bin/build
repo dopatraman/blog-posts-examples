@@ -15,7 +15,9 @@ echo "Fetching project deps..."
 mix deps.get
 
 echo "Cleaning and compiling..."
-echo "If you are using phoenix, here is where you would run `mix phx.digest`"
+echo "If you are using phoenix, here is where you would run mix phx.digest"
+mix phx.digest
+
 echo "Also, if you need to pre-compile any dependencies (bcrypt_elixir), you would do that here too"
 
 echo "Generating release..."

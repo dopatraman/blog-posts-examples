@@ -1,23 +1,25 @@
-FROM ubuntu:18.04
+FROM elixir:1.9.4
 
 ARG secret
 ARG port
+ARG env=dev
+ARG dburl
 
-ENV SECRET_KEY_BASE=$secret \
-    PORT=$port
+ENV LANG=en_US.UTF-8 \
+    TERM=xterm \
+    SECRET_KEY_BASE=$secret \
+    PORT=$port \
+    DATABASE_URL=$dburl \
+    MIX_ENV=$env
 
 WORKDIR /opt/build
 
 ADD ./bin/build /opt/build/bin/build
 
-RUN apt-get update -y && \
-    apt-get install -y git wget vim locales && \
-    apt-get install make && \
-    locale-gen en_US.UTF-8 &&& \
-    wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
-    dpkg -i erlang-solutions_1.0_all.deb && \
-    rm erlang-solutions_1.0_all.deb && \
-    apt-get update -y && \
-    apt-get install -y erlang elixir
+RUN \
+  apt-get update -y && \
+  apt-get install -y git wget vim locales && \
+  locale-gen en_US.UTF-8 && \
+  apt-get install make
 
 CMD ["bin/build"]
