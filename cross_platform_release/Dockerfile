@@ -16,10 +16,4 @@ WORKDIR /opt/build
 
 ADD ./bin/build /opt/build/bin/build
 
-RUN \
-  apt-get update -y && \
-  apt-get install -y git wget vim locales && \
-  locale-gen en_US.UTF-8 && \
-  apt-get install make
-
 CMD ["bin/build"]
