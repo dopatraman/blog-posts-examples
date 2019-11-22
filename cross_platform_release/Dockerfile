@@ -5,8 +5,7 @@ ARG port
 ARG env=dev
 ARG dburl
 
-ENV LANG=en_US.UTF-8 \
-    TERM=xterm \
+ENV TERM=xterm \
     SECRET_KEY_BASE=$secret \
     PORT=$port \
     DATABASE_URL=$dburl \
@@ -14,6 +13,6 @@ ENV LANG=en_US.UTF-8 \
 
 WORKDIR /opt/build
 
-ADD ./bin/build /opt/build/bin/build
+ADD ./bin/build ./bin/build
 
 CMD ["bin/build"]
