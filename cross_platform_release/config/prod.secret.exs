@@ -32,7 +32,7 @@ config :cross_platform_release, CrossPlatformReleaseWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :cross_platform_release, CrossPlatformReleaseWeb.Endpoint, server: true
+config :cross_platform_release, CrossPlatformReleaseWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
