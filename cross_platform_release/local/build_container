@@ -7,5 +7,5 @@
 docker build --build-arg env=prod \
   --build-arg port=4000 \
   --build-arg secret=bogus_secret \
-  --build-arg dburl=bogus_url \
+  --build-arg dburl=user:pass@bogus_url/bogus_db \
   -t my-project:latest .
