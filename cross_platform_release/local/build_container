@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# This file is meant to be private!
+# You should remove it from source control if
+# you plan on using this repo.
+
+docker build --build-arg env=prod \
+  --build-arg port=4000 \
+  --build-arg secret=bogus_secret \
+  --build-arg dburl=bogus_url \
+  -t my-project:latest .

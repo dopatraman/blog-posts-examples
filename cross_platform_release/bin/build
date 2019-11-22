@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+echo "Starting release process..."
+cd /opt/build
+
+echo "Creating release artifact directory..."
+mkdir -p /opt/build/rel/artifacts
+
+echo "Installing rebar and hex..."
+mix local.rebar --force
+mix local.hex --if-missing --force
+
+echo "Fetching project deps..."
+mix deps.get
+
+echo "Cleaning and compiling..."
+echo "If you are using phoenix, here is where you would run mix phx.digest"
+mix phx.digest
+
+echo "Also, if you need to pre-compile any dependencies (bcrypt_elixir), you would do that here too"
+
+echo "Generating release..."
+mix release
+
+echo "Creating tarball..."
+tar -zcf "/opt/build/rel/artifacts/PROJECT_NAME-PROJECT_VERSION.tar.gz" /opt/build/_build/prod
+
+echo "Release generated at rel/artifacts/PROJECT_NAME-PROJECT_VERSION.tar.gz"
+exit 0
