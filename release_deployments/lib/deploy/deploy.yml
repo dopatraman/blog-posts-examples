@@ -1,0 +1,12 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: set project facts
+    include: tasks/project-facts.yml
+
+  - name: setup system packages
+    include: tasks/system-setup.yml
+
+  - name: deploy release
+    include: tasks/deploy-release.yml

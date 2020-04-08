@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: set project facts
+    include: tasks/project-facts.yml
+
+  - name: teardown project
+    include: tasks/down.yml

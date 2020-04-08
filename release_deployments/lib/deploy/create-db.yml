@@ -1,0 +1,21 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: set project facts
+    include: tasks/project-facts.yml
+  
+  - name: setup system packages
+    include: tasks/system-setup.yml
+
+  - name: create credentials directory
+    include: tasks/credentials.yml
+
+  - name: set postgres facts
+    include: tasks/postgres-facts.yml
+  
+  - name: create database
+    include: tasks/postgres.yml
+
+  - name: seed database
+    include: tasks/seed-db.yml

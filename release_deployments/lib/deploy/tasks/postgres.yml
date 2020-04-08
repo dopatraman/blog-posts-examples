@@ -1,0 +1,49 @@
+---
+# Note: try to reproduce the caching error with 
+# the PPA key:
+# - name: "add postgres repository"
+#   apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"
+
+
+# - name: "add postgres repository key"
+#   apt_key: url="https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+
+
+# - name: "install postgres & libpq-dev"
+#   apt: name="{{ item }}" update_cache=yes state=present
+#   with_items:
+#     - postgresql-9.4
+#     - libpq-dev
+- name: install postgres + postgres packages
+  apt:
+    update_cache: yes
+    state: present
+    name:
+      - postgresql
+      - postgresql-contrib
+      - libpq-dev
+
+- name: install psycopg2
+  pip:
+    name: psycopg2
+
+# TODO: Investigate this warning:
+# [WARNING]: Module remote_tmp /var/lib/postgresql/.ansible/tmp did not exist and was created with a
+# mode of 0700, this may cause issues when running as another user. To avoid this, create the
+# remote_tmp dir with the correct permissions manually
+
+- name: create postgres user
+  postgresql_user:
+    name: "{{database_user}}"
+    password: "{{database_password}}"
+    role_attr_flags: CREATEDB,SUPERUSER
+    state: present
+  become: yes
+  become_user: postgres
+
+- name: create database
+  postgresql_db:
+    name: "{{database_name}}"
+    encoding: "UTF-8"
+  become: yes
+  become_user: postgres
