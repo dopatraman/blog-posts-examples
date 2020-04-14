@@ -1,0 +1,14 @@
+---
+- name: check to see if release artifact exists remotely
+  stat:
+    path: "{{remote_release_artifact_path}}"
+  register: remote_release_artifact_st
+
+- name: start remote server
+  command: "{{remote_release_artifact_path}} daemon"
+  when: remote_release_artifact_st.stat.exists
+  register: foo
+
+- name: echo end
+  debug:
+    var: foo

@@ -1,0 +1,17 @@
+---
+- when: "database_name is not defined"
+  name: "compute database name"
+  set_fact:
+    database_name: "{{ lookup('env', 'DATABASE_NAME') }}"
+
+- name: set database host
+  set_fact:
+    database_host: "{{ lookup('env', 'DATABASE_HOST') }}"
+
+- name: create or get postgres password
+  set_fact:
+    database_password: "{{ lookup('env', 'DATABASE_PASSWORD') }}"
+
+- name: set database user
+  set_fact:
+    database_user: "{{ lookup('env', 'DATABASE_USER') }}"

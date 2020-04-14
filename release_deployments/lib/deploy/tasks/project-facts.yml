@@ -1,0 +1,36 @@
+---
+- name: set app name
+  set_fact:
+    app_name: api
+
+- name: set app version
+  set_fact:
+    app_version: "0.1.0"
+
+- name: set credentials directory path
+  set_fact:
+    credentials_dir: "~/credentials/"
+
+- name: set release name
+  set_fact:
+    release_name: "{{app_name}}-{{app_version}}"
+
+- name: set release directory name
+  set_fact:
+    release_dir: "../rel/artifacts/"
+
+- name: set release archive path
+  set_fact:
+    release_archive_path: "{{release_dir}}{{release_name}}.tar.gz"
+
+- name: set remote release directory
+  set_fact:
+    remote_release_dir: "~/rel/artifacts/"
+
+- name: set remote release archive path
+  set_fact:
+    remote_release_archive_path: "{{remote_release_dir}}{{release_name}}.tar.gz"
+
+- name: set remote release artifact path
+  set_fact:
+    remote_release_artifact_path: "{{remote_release_dir}}opt/build/_build/prod/rel/api/bin/api"

@@ -1,0 +1,31 @@
+---
+- name: install system packages
+  apt:
+    update_cache: yes
+    state: present
+    name:
+      - gcc
+      - g++
+      - curl
+      - wget
+      - unzip
+      - git
+      - python-dev
+      - python-apt
+      - make
+      - automake
+      - autoconf
+      - libreadline-dev
+      - libncurses-dev
+      - libssl-dev
+      - libyaml-dev
+      - libxslt-dev
+      - libffi-dev
+      - libtool
+      - unixodbc-dev
+
+- name: install pip
+  apt:
+    update_cache: yes
+    state: present
+    name: python-pip

@@ -1,0 +1,26 @@
+---
+- name: check if postgres is running
+  command: "/etc/init.d/postgresql status"
+  register: postgres_st
+
+- fail:
+    msg: "Postgres is not running"
+  when: postgres_st.stderr != "" or postgres_st.failed != false
+
+- name: check to see if release artifact exists remotely
+  stat:
+    path: "{{remote_release_artifact_path}}"
+  register: remote_release_artifact_st
+
+- name: run migrations on remote server
+  command: "{{remote_release_artifact_path}} eval 'ReleaseTasks.migrate'"
+  when: remote_release_artifact_st.stat.exists
+  register: foo
+
+- fail:
+    msg: "No remote release artifact"
+  when: not remote_release_artifact_st.stat.exists
+
+- name: debug
+  debug:
+    var: foo

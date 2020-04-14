@@ -1,0 +1,22 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: set project facts
+    include: tasks/project-facts.yml
+
+  - name: set postgres facts
+    include: tasks/postgres-facts.yml
+
+  - name: drop database
+    postgresql_db:
+      login_user: "{{database_user}}"
+      login_password: "{{database_password}}"
+      login_host: "{{database_host}}"
+      name: "{{database_name}}"
+      state: absent
+    register: drop_db_cmd
+
+  - name: echo end db
+    debug:
+      var: drop_db_cmd

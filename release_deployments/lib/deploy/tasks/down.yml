@@ -1,0 +1,19 @@
+---
+- name: check to see if release artifact exists remotely
+  stat:
+    path: "{{remote_release_artifact_path}}"
+  register: remote_release_artifact_st
+
+- name: stop remote server
+  command: "{{remote_release_artifact_path}} stop"
+  when: remote_release_artifact_st.stat.exists
+  register: stop_cmd
+
+- name: clean remote release directory
+  file:
+    path: "{{remote_release_dir}}"
+    state: absent
+
+- name: echo end
+  debug:
+    var: stop_cmd

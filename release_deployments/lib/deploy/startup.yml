@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+  tasks:
+  - name: set project facts
+    include: tasks/project-facts.yml
+
+  - name: start server
+    include: tasks/up.yml
